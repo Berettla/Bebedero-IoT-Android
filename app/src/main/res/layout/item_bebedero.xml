@@ -1,6 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cvTarjetaBebedero"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    app:cardBackgroundColor="#1E1E1E"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="0dp"
+    app:strokeColor="#333333"
+    app:strokeWidth="1dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <!-- Fila superior: nombre + pill de estado -->
+        <TextView
+            android:id="@+id/tvNombreBebedero"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif-medium"
+            android:maxLines="1"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/llEstadoPill"
+            app:layout_constraintEnd_toStartOf="@+id/llEstadoPill"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/llEstadoPill"
+            tools:text="Nombre del bebedero" />
+
+        <LinearLayout
+            android:id="@+id/llEstadoPill"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="8dp"
+            android:paddingTop="4dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@drawable/bg_pill_online">
+
+            <View
+                android:id="@+id/vPuntoEstado"
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                tools:background="@drawable/dot_online" />
+
+            <TextView
+                android:id="@+id/tvEstadoConexion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:textSize="11sp"
+                tools:text="Estado"
+                tools:textColor="#4CAF50" />
+        </LinearLayout>
+
+        <!-- Fila inferior: gota + nivel de agua -->
+        <ImageView
+            android:id="@+id/ivIconoGota"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="Nivel de agua"
+            android:src="@drawable/ic_gota"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llEstadoPill" />
+
+        <TextView
+            android:id="@+id/tvEtiquetaNivel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Nivel de agua: "
+            android:textColor="#B3B3B3"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivIconoGota"
+            app:layout_constraintStart_toEndOf="@+id/ivIconoGota"
+            app:layout_constraintTop_toTopOf="@+id/ivIconoGota" />
+
+        <TextView
+            android:id="@+id/tvNivelAgua"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/ivIconoGota"
+            app:layout_constraintStart_toEndOf="@+id/tvEtiquetaNivel"
+            app:layout_constraintTop_toTopOf="@+id/ivIconoGota"
+            tools:text="00%" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

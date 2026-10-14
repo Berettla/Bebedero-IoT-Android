@@ -16,6 +16,7 @@ import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
+import android.content.Intent
 
 class MainActivity : AppCompatActivity() {
 
@@ -77,7 +78,8 @@ class MainActivity : AppCompatActivity() {
                 setLoading(false)
                 if (task.isSuccessful) {
                     showMessage("¡Acceso concedido!")
-                    // Aquí irá el salto a la pantalla de Telemetría
+                    startActivity(Intent(this, ListaBebederosActivity::class.java))
+                    finish()
                 } else {
                     showMessage(errorMessage(task.exception))
                 }
