@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.RecyclerView
-
+import android.content.Intent
 class ListaBebederosActivity : AppCompatActivity() {
 
     private lateinit var adapter: BebederoAdapter
@@ -34,7 +34,7 @@ class ListaBebederosActivity : AppCompatActivity() {
         // Carga los datos de prueba y conecta la lista con el adapter
         bebederos.addAll(datosDePrueba())
         rvBebederos = findViewById(R.id.rvBebederos)
-        adapter = BebederoAdapter(bebederos.toList())
+        adapter = BebederoAdapter(bebederos.toList()) { bebedero -> abrirMetricas(bebedero) }
         rvBebederos.adapter = adapter
 
         // Botón "+": abre el modal de vinculación
@@ -42,6 +42,14 @@ class ListaBebederosActivity : AppCompatActivity() {
         btnAddDevice.setOnClickListener { mostrarDialogoVincular() }
     }
 
+    private fun abrirMetricas(bebedero: Bebedero) {
+        val intent = Intent(this, MetricasBebederoActivity::class.java)
+        intent.putExtra(MetricasBebederoActivity.EXTRA_ID, bebedero.id)
+        intent.putExtra(MetricasBebederoActivity.EXTRA_NOMBRE, bebedero.nombre)
+        intent.putExtra(MetricasBebederoActivity.EXTRA_NIVEL, bebedero.nivel)
+        intent.putExtra(MetricasBebederoActivity.EXTRA_ULTIMA_CONEXION, bebedero.ultimaConexion)
+        startActivity(intent)
+    }
     private fun mostrarDialogoVincular() {
         // Convierte el XML del modal en vistas que podemos usar
         val vista = LayoutInflater.from(this)

@@ -8,7 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class BebederoAdapter(
-    private var bebederos: List<Bebedero>
+    private var bebederos: List<Bebedero>,
+    private val onItemClick: (Bebedero) -> Unit   // qué hacer cuando tocan una tarjeta
 ) : RecyclerView.Adapter<BebederoAdapter.BebederoViewHolder>() {
 
     // Guarda las vistas de UNA tarjeta, para no buscarlas cada vez
@@ -45,6 +46,9 @@ class BebederoAdapter(
             holder.llPill.setBackgroundResource(R.drawable.bg_pill_offline)
             holder.puntoEstado.setBackgroundResource(R.drawable.dot_offline)
         }
+
+        // Al tocar la tarjeta, avisa a la pantalla cuál bebedero fue
+        holder.itemView.setOnClickListener { onItemClick(bebedero) }
     }
 
     // Cuántas tarjetas hay en total

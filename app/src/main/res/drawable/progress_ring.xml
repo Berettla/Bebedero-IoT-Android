@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Parte vacía del anillo -->
+    <item android:id="@android:id/background">
+        <shape
+            android:innerRadius="95dp"
+            android:shape="ring"
+            android:thickness="15dp"
+            android:useLevel="false">
+            <solid android:color="#1E1E1E" />
+        </shape>
+    </item>
+
+    <!-- Parte llena (turquesa): empieza arriba y avanza en sentido del reloj -->
+    <item android:id="@android:id/progress">
+        <rotate
+            android:fromDegrees="270"
+            android:pivotX="50%"
+            android:pivotY="50%"
+            android:toDegrees="270">
+            <shape
+                android:innerRadius="95dp"
+                android:shape="ring"
+                android:thickness="15dp"
+                android:useLevel="true">
+                <solid android:color="#03DAC6" />
+            </shape>
+        </rotate>
+    </item>
+
+</layer-list>

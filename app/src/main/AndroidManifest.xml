@@ -22,11 +22,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DashboardActivity"
+            android:name=".ListaBebederosActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".ListaBebederosActivity"
+            android:name=".MetricasBebederoActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
     </application>
