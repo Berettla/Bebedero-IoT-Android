@@ -50,7 +50,8 @@
         android:paddingEnd="16dp"
         android:textColor="#FFFFFF"
         android:textColorHint="#B3B3B3"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:maxLength="40"/>
 
     <!-- Campo 2: nombre del bebedero -->
     <TextView
@@ -77,7 +78,8 @@
         android:paddingEnd="16dp"
         android:textColor="#FFFFFF"
         android:textColorHint="#B3B3B3"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:maxLength="40"/>
 
     <!-- Botones -->
     <LinearLayout

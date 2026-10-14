@@ -1,5 +1,6 @@
 package com.agustin.bebederoiot
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
@@ -16,7 +17,6 @@ import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
-import android.content.Intent
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,9 +28,21 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
         auth = FirebaseAuth.getInstance()
+
+        // Si ya hay una sesión iniciada y no pasaron 7 días sin usar la app,
+        // se salta el login y se abre la lista directamente.
+        if (auth.currentUser != null) {
+            if (SesionManager.sesionVigente(this)) {
+                irALista()
+                return
+            } else {
+                SesionManager.cerrarSesion(this)   // sesión vencida: se pide iniciar de nuevo
+            }
+        }
+
+        setContentView(R.layout.activity_main)
 
         scrollRoot = findViewById(R.id.scrollRoot)
         etEmail = findViewById(R.id.etEmail)
@@ -59,6 +71,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun irALista() {
+        SesionManager.registrarActividad(this)   // reinicia el contador de inactividad
+        startActivity(Intent(this, ListaBebederosActivity::class.java))
+        finish()
+    }
+
     private fun attemptLogin() {
         val email = etEmail.text.toString().trim()
         val password = etPassword.text.toString() // sin trim: los espacios pueden ser parte de la clave
@@ -77,9 +95,7 @@ class MainActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 setLoading(false)
                 if (task.isSuccessful) {
-                    showMessage("¡Acceso concedido!")
-                    startActivity(Intent(this, ListaBebederosActivity::class.java))
-                    finish()
+                    irALista()
                 } else {
                     showMessage(errorMessage(task.exception))
                 }

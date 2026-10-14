@@ -14,5 +14,6 @@ data class Bebedero(
 
     companion object {
         const val UMBRAL_OFFLINE_MS = 5 * 60 * 1000L // 5 minutos
+        const val NIVEL_BAJO = 20                    // menos de 20% se destaca
     }
 }

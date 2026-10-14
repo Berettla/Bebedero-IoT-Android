@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -10,37 +9,55 @@
     android:background="#121212"
     tools:context=".ListaBebederosActivity">
 
-    <!-- HEADER (88dp, padding horizontal 24dp) -->
+    <!-- HEADER (88dp, padding horizontal 24dp): textos + engranaje -->
     <LinearLayout
         android:id="@+id/headerBar"
         android:layout_width="0dp"
         android:layout_height="88dp"
         android:gravity="center_vertical"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:paddingStart="24dp"
         android:paddingEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tvSubtituloPantalla"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:letterSpacing="0.083"
-            android:text="MONITOREO IOT"
-            android:textColor="#B3B3B3"
-            android:textSize="12sp" />
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvTituloPantalla"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="Mis Bebederos"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tvSubtituloPantalla"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:letterSpacing="0.083"
+                android:text="MONITOREO IOT"
+                android:textColor="#B3B3B3"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvTituloPantalla"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Mis Bebederos"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/btnConfig"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="-12dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Configuración"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_settings" />
     </LinearLayout>
 
     <!-- Línea divisoria inferior del header -->
@@ -72,7 +89,47 @@
         tools:itemCount="2"
         tools:listitem="@layout/item_bebedero" />
 
-    <!-- BOTÓN FLOTANTE (+): va después del RecyclerView para quedar encima -->
+    <!-- MENSAJE DE LISTA VACÍA (solo se ve cuando no hay bebederos) -->
+    <LinearLayout
+        android:id="@+id/llListaVacia"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="48dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewDivisor">
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:alpha="0.4"
+            android:contentDescription="Sin bebederos"
+            android:src="@drawable/ic_gota" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Aún no tienes bebederos"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="Toca el botón + para vincular tu primer equipo"
+            android:textColor="#B3B3B3"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <!-- BOTÓN FLOTANTE (+): va al final para quedar encima de todo -->
     <ImageButton
         android:id="@+id/btnAddDevice"
         android:layout_width="64dp"
